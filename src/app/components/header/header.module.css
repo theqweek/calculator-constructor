@@ -1,0 +1,12 @@
+.header {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+}
+
+.title {
+  color: white;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}

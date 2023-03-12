@@ -1,10 +1,4 @@
 .App {
-  background: black;
-  color: white;
-  padding: 2rem;
-}
-
-.title {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  background: #182569;
 }

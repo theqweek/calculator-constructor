@@ -1,0 +1,48 @@
+.canvas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 448px;
+  border: 2px dashed #C4C4C4;
+  border-radius: 6px;
+}
+
+.canvas_info {
+  position: relative;
+  width: 127px;
+  height: 84px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+}
+
+.canvas_icon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 53px;
+  top: 1px;
+}
+
+.canvas_text {
+  width: 106px;
+  height: 30px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+}
+
+.canvas_giga {
+  height: 17px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #5D5FEF;
+}

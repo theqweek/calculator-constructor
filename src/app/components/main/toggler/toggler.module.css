@@ -1,0 +1,45 @@
+.toggler {
+  position: absolute;
+  top: calc(38px - 106px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 38px;
+  background: #F3F4F6;
+  border-radius: 6px;
+  width: inherit;
+  padding: 1px;
+}
+
+.toggler_item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 11px;
+  gap: 10px;
+  width: auto;
+  height: 100%;
+  cursor: pointer;
+  background: #F3F4F6;
+  border: 1px solid #F3F4F6;
+}
+
+.toggler_active {
+  border: 1px solid #E2E3E5;
+  background: #FFFFFF;
+  border-radius: 5px;
+}
+
+.toggler_item:focus, .toggler_item:active{
+  border: 1px solid #E2E3E5;
+  background: #FFFFFF;
+  border-radius: 5px;
+  border: 1px solid #FFFFFF;
+}
+
+.toggler_text {
+  color: #4D5562;
+  font-family: 'Inter';
+  font-size: 14px;
+  line-height: 15px;
+}
