@@ -5,5 +5,6 @@ export interface MyCanvasProps {
     name: string;
     data: string[]
   },
-  Icon: FC<SVGProps<SVGSVGElement>>
+  Icon: FC<SVGProps<SVGSVGElement>>,
+  fns: ((e: any, board?: any, item?: any) => void)[]
 }

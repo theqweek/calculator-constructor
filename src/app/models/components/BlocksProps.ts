@@ -1,3 +1,5 @@
+import { IBoard } from "./BoardProps"
+
 export interface IBlock {
   id: number,
   name: string,
@@ -5,5 +7,7 @@ export interface IBlock {
 }
 
 export interface BlockProps {
-  component: IBlock
+  component: IBlock,
+  board: IBoard,
+  fns: ((e: any, board?: any, item?: any) => void)[]
 }

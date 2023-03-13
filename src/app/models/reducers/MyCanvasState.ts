@@ -1,6 +1,5 @@
-import { FC } from "react"
-import { BlockProps, IBlock } from "../components/BlocksProps"
+import { IBoard } from "../components/BoardProps"
 
 export interface MyCanvasState {
-  blocks: IBlock[]
+  boards: IBoard[]
 }

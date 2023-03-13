@@ -1,40 +1,27 @@
-import React, { FC }from 'react'
-import { useAppSelector } from '../../../hooks/useAppDispatch';
-import { BlockProps } from '../../../models/components/BlocksProps';
+import React, { FC, useRef, DragEvent, useState }from 'react'
+import { useAppDispatch, useAppSelector } from '../../../hooks/useAppDispatch';
+import { BlockProps, IBlock } from '../../../models/components/BlocksProps';
+import {myCanvasSlice} from '../../../store/reducers/myCanvasSlice';
 import s from './block.module.css'
 
-const Block: FC<BlockProps> = ({ component }) => {
-  const { name, data } = component;
+const Block: FC<BlockProps> = ({ component, fns, board }) => {
+  const { id, name, data } = component;
+  const [dragOverHandler, dragLeaveHandler, dragStartHandler, dragEndHandler, dropHandler] = fns
   const { isRuntime } = useAppSelector(state => state.togglerReducer)
-
-  const dragOverHandler = (e: any) => {
-    e.preventDefault();
-    if (e.target.className == s[name]) {
-      e.target.style.boxShadow = '0 2px 3px gray'
-    }
-  }
-  const dragLeaveHandler = (e: any) => {
-    e.target.style.boxShadow = 'none'
-  }
-  const dragStartHandler = (e: any) => {
-
-  }
-  const dragEndHandler = (e: any) => {
-    e.target.style.boxShadow = 'none'
-  }
-  const dropHandler = (e: any) => {
-    
-  }
+  const { remove } = myCanvasSlice.actions
+  const dispatch = useAppDispatch();
+  const workplaceRef = useRef(null)
   
   return (
     <div 
       className={s[name]} 
       draggable={true}
-      onDragOver={e => dragOverHandler(e)}
+      //onDragOver={e => dragOverHandler(e)}
       onDragLeave={e => dragLeaveHandler(e)}
-      onDragStart={e => dragStartHandler(e)}
-      onDragEnd={e => dragEndHandler(e)}
-      onDrop={e => dropHandler(e)}
+      onDragStart={e => dragStartHandler(e, board, component)}
+      //onDragEnd={e => dragEndHandler(e)}
+      onDrop={e => dropHandler(e, board, component)}
+      onDoubleClick={() => dispatch(remove(id))}
     >
       {data.map(item => (
         <div 

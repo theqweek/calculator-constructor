@@ -1,11 +1,21 @@
 import  { FC } from 'react'
+import { useAppSelector } from '../../../hooks/useAppDispatch';
 import { MyCanvasProps } from '../../../models/components/MyCanvasProps';
 import s from './my-canvas.module.css'
 
-const MyCanvas: FC<MyCanvasProps> = ({ component, Icon }) => {
+const MyCanvas: FC<MyCanvasProps> = ({ component, Icon, fns }) => {
+  const [dragOverHandler, dragLeaveHandler, dragEndHandler, dropHandler, fn, dropFirstCard] = fns
+  const { boards } = useAppSelector(state => state.myCanvasReducer)
   const { name, data } = component;
   return (
-    <div className={s[name]}>
+    <div 
+      className={s[name]} 
+      
+      onDragOver={e => dragOverHandler(e)}
+      onDragLeave={e => dragLeaveHandler(e)}
+      onDragEnd={e => dragEndHandler(e)}
+      onDrop={e => dropFirstCard(e, boards[1])}
+    >
       <div className={s[name + '_info']}>
         <Icon />
         <div className={s[name + '_giga']}>{data[0]}</div>
