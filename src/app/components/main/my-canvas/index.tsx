@@ -4,7 +4,14 @@ import { MyCanvasProps } from '../../../models/components/MyCanvasProps';
 import s from './my-canvas.module.css'
 
 const MyCanvas: FC<MyCanvasProps> = ({ component, Icon, fns }) => {
-  const [dragOverHandler, dragLeaveHandler, dragEndHandler, dropHandler, fn, dropFirstCard] = fns
+  const {
+    dragOverHandler,
+    dragLeaveHandler,
+    dragStartHandler,
+    dragEndHandler,
+    dropHandler,
+    dropCard
+  } = fns
   const { boards } = useAppSelector(state => state.myCanvasReducer)
   const { name, data } = component;
   return (
@@ -14,7 +21,7 @@ const MyCanvas: FC<MyCanvasProps> = ({ component, Icon, fns }) => {
       onDragOver={e => dragOverHandler(e)}
       onDragLeave={e => dragLeaveHandler(e)}
       onDragEnd={e => dragEndHandler(e)}
-      onDrop={e => dropFirstCard(e, boards[1])}
+      onDrop={e => dropCard(e, boards[1])}
     >
       <div className={s[name + '_info']}>
         <Icon />

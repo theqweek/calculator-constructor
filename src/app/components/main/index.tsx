@@ -26,17 +26,15 @@ const Main: FC = () => {
   const [curBlock, setCurBlock] = useState<IBlock | null>(null)
   const [curBoard, setCurBoard] = useState<IBoard | null>(null)
 
-  const dragOverHandler = (e: any) => {
+  const dragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
 
     if (e.currentTarget.className.includes('block')) {
       e.currentTarget.style.boxShadow = '0px 4px 0px -2px #5D5FEF'
     }
 
-    if (e.target.className.includes('my-canvas')) {
+    if ((e.target as Element).className.includes('my-canvas')) {
       e.currentTarget.style.background = '#F0F9FF'
-      console.log(e);
-      
     }
     
     // const coincidence = (el) => {
@@ -48,43 +46,46 @@ const Main: FC = () => {
     // }
     }
   
-  const dragLeaveHandler = (e: any): any => {
-    e.currentTarget.style.boxShadow = 'none'
+  const dragLeaveHandler = (e: React.DragEvent<HTMLDivElement>) => {
+    e.currentTarget.style.boxShadow = 'none';
+    console.log(e.currentTarget);
+    //(e.target as HTMLElement).style.background = '#FFFFFF'
   }
   
-  const dragStartHandler = (e: any, board: IBoard, block: IBlock) => {
+  const dragStartHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard, block: IBlock) => {
     setCurBoard(board)
     setCurBlock(block)
   }
-  const dragEndHandler = (e: any): any => {
+  const dragEndHandler = (e: React.DragEvent<HTMLDivElement>) => {
     //e.target.style.boxShadow = 'none'
     e.currentTarget.style.boxShadow = 'none'
     console.log(e.currentTarget.className);
   }
 
-  const dropHandler = (e: any, board: IBoard, block: IBlock) => {
+  const dropHandler = (e: React.DragEvent<HTMLDivElement>, board: IBoard, block: IBlock) => {
     e.preventDefault();
     e.stopPropagation()
     e.currentTarget.style.boxShadow = 'none'
-    // console.log((curBoard as IBoard).blocks[0]);
-    // let a = [...board.blocks]
-    // console.log([...a]);
-    
-    // a.splice(0,2)
-    // console.log(a);
-    
+    console.log(e.detail);
 
     dispatch(replace([curBoard as IBoard, board, curBlock as IBlock, block]))
   }
 
-  const dropFirstCard = (e: any, board: IBoard) => {
-    console.log(e.target);
-     
-    e.currentTarget.style.boxShadow = 'none'
+  const dropCard = (e: React.DragEvent<HTMLDivElement>, board: IBoard) => {
+    console.log(e.detail);
+    
+    e.currentTarget.style.boxShadow = '0px 2px 4px rgb(0 0 0 / 6%), 0px 4px 6px rgb(0 0 0 / 10%);'
     dispatch(addFirst([board, curBlock as IBlock]))
   }
 
-  const fns = [dragOverHandler, dragLeaveHandler, dragStartHandler, dragEndHandler, dropHandler, dropFirstCard];
+  const fns = {
+    dragOverHandler,
+    dragLeaveHandler,
+    dragStartHandler,
+    dragEndHandler,
+    dropHandler,
+    dropCard
+  }
 
   return (
     <main className={s.main}>
@@ -94,9 +95,9 @@ const Main: FC = () => {
             <div className={s.right_field}>
               {board.side === 'right' ? <>
                 <Toggler component={toggler} icons={[eye, selector]}/>
-                {!board.blocks.length ? <MyCanvas component={canvas} Icon={cIcon} fns={fns}/> : <Board board={board} fns={fns}/>}
+              {!board.blocks.length ? <MyCanvas component={canvas} Icon={cIcon} fns={fns}/> : <Board board={board} fns={fns} curBlock={curBlock as IBlock} />}
               </>
-              : <Board board={board} fns={fns}/>}
+              : <Board board={board} fns={fns} curBlock={curBlock as IBlock}/>}
             </div>
           ))}
         </div>

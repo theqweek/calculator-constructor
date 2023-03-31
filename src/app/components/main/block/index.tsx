@@ -6,7 +6,14 @@ import s from './block.module.css'
 
 const Block: FC<BlockProps> = ({ component, fns, board }) => {
   const { id, name, data } = component;
-  const [dragOverHandler, dragLeaveHandler, dragStartHandler, dragEndHandler, dropHandler] = fns
+  const {
+    dragOverHandler,
+    dragLeaveHandler,
+    dragStartHandler,
+    dragEndHandler,
+    dropHandler,
+    dropCard} = fns;
+
   const { isRuntime } = useAppSelector(state => state.togglerReducer)
   const { remove } = myCanvasSlice.actions
   const dispatch = useAppDispatch();
@@ -16,10 +23,10 @@ const Block: FC<BlockProps> = ({ component, fns, board }) => {
     <div 
       className={s[name]} 
       draggable={true}
-      //onDragOver={e => dragOverHandler(e)}
+      onDragOver={e => dragOverHandler(e)}
       onDragLeave={e => dragLeaveHandler(e)}
       onDragStart={e => dragStartHandler(e, board, component)}
-      //onDragEnd={e => dragEndHandler(e)}
+      onDragEnd={e => dragEndHandler(e)}
       onDrop={e => dropHandler(e, board, component)}
       onDoubleClick={() => dispatch(remove(id))}
     >

@@ -1,4 +1,5 @@
 import { FC, SVGProps } from 'react'
+import { DnDFunctions } from '../DnDFunctions';
 
 export interface MyCanvasProps {
   component: {
@@ -6,5 +7,5 @@ export interface MyCanvasProps {
     data: string[]
   },
   Icon: FC<SVGProps<SVGSVGElement>>,
-  fns: ((e: any, board?: any, item?: any) => void)[]
+  fns: DnDFunctions;
 }

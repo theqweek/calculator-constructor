@@ -7,16 +7,21 @@ import Block from '../block'
 import s from './board.module.css'
 
 
-const Board: FC<BoardProps> = ({ board, fns }) => {
+const Board: FC<BoardProps> = ({ board, fns, curBlock }) => {
   const { isRuntime } = useAppSelector(state => state.togglerReducer)
-  const [dragOverHandler, dragLeaveHandler, dropHandler, dragEndHandler, fn, dropFirstCard] = fns;
+  const { 
+    dragOverHandler,
+    dragLeaveHandler,
+    dragEndHandler,
+    dropHandler } = fns;
+
   return (
     
     <div 
       className={`${s.sidebar}`}
       onDragOver={e => dragOverHandler(e)}
       onDragLeave={e => dragLeaveHandler(e)}
-      onDrop={e => dropFirstCard(e, board)}
+      onDrop={e => dropHandler(e, board, curBlock)}
       onDragEnd={e => dragEndHandler(e)}
     >
       {(!isRuntime || board.side === 'right') && board.blocks.map(block => (

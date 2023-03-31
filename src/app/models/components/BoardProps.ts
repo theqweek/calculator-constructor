@@ -1,3 +1,4 @@
+import { DnDFunctions } from "../DnDFunctions"
 import { IBlock } from "./BlocksProps"
 
 export interface IBoard {
@@ -7,5 +8,6 @@ export interface IBoard {
 
 export interface BoardProps {
   board: IBoard,
-  fns:((e: any, board?: any, item?: any) => any)[]
+  fns: DnDFunctions
+  curBlock: IBlock
 }
